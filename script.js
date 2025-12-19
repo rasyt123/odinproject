@@ -15,12 +15,6 @@ function getComputerChoice() {
 }
 
 
-let getHumanChoice = () => {
-    let humanchoice = prompt("Select your choice.");
-    return humanchoice;
-}
-
-
 function playRound(humanChoice, computerChoice) {
 
     let playerchoice = humanChoice.toLowerCase();
@@ -47,8 +41,56 @@ function playRound(humanChoice, computerChoice) {
 }
 
 
+function detectWin(score1, score2) {
+    const bodynode = document.querySelector("body");
+    const winnode = document.createElement("h2");
+
+    if (score1 > 5) {
+        winnode.textContent = "Human has greater than 5 points. He wins!";
+        bodynode.appendChild(winnode);
+        
+    } else if (score2 > 5) {
+        winnode.textContent = "Computer has greater than 5 points. Computer wins!"
+        bodynode.appendChild(winnode);
+
+    }
+}
+
+function playmessages(hselection, cselection) {
+    const bodynode = document.querySelector("body");
+    
+
+    const hmessage = document.createElement("p");
+    const cmessage = document.createElement("p");
+
+    hmessage.textContent = "Human played " + hselection;
+    cmessage.textContent = "Computer played " + cselection;
+    bodynode.appendChild(hmessage);
+    bodynode.appendChild(cmessage);
+}
+
+
+
+function showscores(hscore, cscore) { 
+     const bodynode = document.querySelector("body");
+    
+
+    const hmessage = document.createElement("p");
+    const cmessage = document.createElement("p");
+
+    hmessage.textContent = "Here is the human score: " + hscore;
+    cmessage.textContent = "Here is the computer score: " + cscore;
+    bodynode.appendChild(hmessage);
+    bodynode.appendChild(cmessage);
+
+
+
+}
+
 function playGame() {
-    for (let i = 0; i < 5; i++) {
+
+   
+    /*
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
         console.log("Human played " + humanSelection);
@@ -57,13 +99,56 @@ function playGame() {
         console.log("Here is the human score: " + humanScore);
         console.log("Here is the computer score: " + computerScore);
         console.log(message);
-        console.log(`Round ${i + 1}`);
-    }
+
+        */
 }
 
-
- 
+let humanchoice;
 let humanScore = 0;
 let computerScore = 0;
 
-playGame();
+
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+
+rock.addEventListener('click', (event) => {
+    let choice = getComputerChoice();
+    playmessages("rock", choice);
+    let message = playRound("rock", choice);
+
+
+
+    showscores(humanScore, computerScore);
+    detectWin(humanScore, computerScore);
+
+
+
+});
+
+paper.addEventListener('click', (event) => {
+    let choice = getComputerChoice();
+    playmessages("paper", choice);
+    let message = playRound("paper", choice);
+
+
+    showscores(humanScore, computerScore);
+    detectWin(humanScore, computerScore);
+    
+    
+
+});
+
+
+scissors.addEventListener('click', (event) => {
+    let choice = getComputerChoice();
+    playmessages("scissors", choice);
+    let message = playRound("scissors", choice);
+    
+    showscores(humanScore, computerScore);
+    detectWin(humanScore, computerScore);
+
+
+});
